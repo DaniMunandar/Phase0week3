@@ -1,9 +1,13 @@
 # Phase0week3
 
--- Membuat database
-CREATE DATABASE tourism;
 
--- Membuat table Destinasi
+# Membuat Database
+```
+CREATE DATABASE tourism;
+```
+
+## Membuat tabel untuk Destinations, Hotel dan Pemesanan
+```
 CREATE TABLE IF NOT EXISTS Destinasi (
     ID_Destinasi INT AUTO_INCREMENT PRIMARY KEY,
     Nama_Destinasi VARCHAR(255),
@@ -29,8 +33,10 @@ CREATE TABLE IF NOT EXISTS Pemesanan (
     TanggalCheckOut DATE,
     FOREIGN KEY (ID_Hotel) REFERENCES Hotel(ID_Hotel)
 );
+```
 
--- Menambhkan Desrinasi Hotel dan Pemesanan
+## Menambahkan value Destinasi, Hotel dan Pemesanan
+```
 INSERT INTO Destinasi (Nama_Destinasi, Negara, Deskripsi, Rating)
 VALUES
     ('Bali', 'Indonesia', 'Pulau eksotis dengan pantai indah', 4.5),
@@ -47,39 +53,54 @@ INSERT INTO Pemesanan (Tamu, ID_Hotel, TanggalCheckIn, TanggalCheckOut)
 VALUES
     ('Arnol', 1, '2023-09-10', '2023-09-15'),
     ('Bimo', 2, '2023-10-05', '2023-10-10'),
-    ('Aldo', 3, '2023-11-15', '2023-11-20')
+    ('Aldo', 3, '2023-11-15', '2023-11-20');
+```
+# Data Retrieval
 
--- memangil table destinasi
+## Menampilkan semua Destinasi yang tersimpan dalam database
+```
 SELECT * FROM Destinasi;
+```
 
--- memangil table hotel
+## Menampilkan semua Hotel yang tersimpan dalam database
+```
 SELECT * FROM Hotel;
+```
 
--- memangil table pemesanan
+## Menampilkan semua Pemesanan yang tersimpan dalam database
+```
 SELECT * FROM Pemesanan;
+```
 
--- Memanggil destinasi yang di cari
+## Menampilkan hotel di destinasi tertentu berdasarkan user input
+```
 SELECT Hotel.*
 FROM Hotel
 INNER JOIN Destinasi ON Hotel.ID_Destinasi = Destinasi.ID_Destinasi
 WHERE Destinasi.Nama_Destinasi = 'Bali';
+```
 
--- Menghitung rata-rata rating hotel
+## Menghitung dan menampilkan rating rata-rata hotel di destinasi tertentu
+
+```
 SELECT AVG(Hotel.Rating) AS RataRataRating
 FROM Hotel
 INNER JOIN Destinasi ON Hotel.ID_Destinasi = Destinasi.ID_Destinasi
 WHERE Destinasi.Nama_Destinasi = 'Bali';
+```
 
--- update destinasi
+# Data Modification:
+
+## Update rating destinasi
+```
 UPDATE Destinasi
 SET Rating = [4.7]
 WHERE Nama_Destinasi = 'Bali';
+```
 
--- update hotel
+## Update Alamat hotel.
+```
 UPDATE Hotel
-SET Alamat = '[AlamatBaru]'
-WHERE Nama_Hotel = '[NamaHotel]';
-
--- hapus pemesanan
-DELETE FROM Pemesanan
-WHERE ID_Pemesanan = 1;
+SET Alamat = 'Simatupang'
+WHERE Nama_Hotel = 'Aston';
+```
